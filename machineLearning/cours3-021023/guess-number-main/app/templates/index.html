@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form id="form" hx-post="{% url 'guess' %}" hx-target="#guess" hx-swap="outerHTML">
+    {% csrf_token %}
+    <div class="flex items-center gap-4">
+        <canvas id="canvas" class="m-5 border-2 border-black"></canvas>
+        <div class="flex flex-col gap-4">
+            <button 
+                type="submit"
+                id="button"
+                class="border-2 rounded bg-teal-300 border-teal-300 px-2 hover:border-teal-500"
+            >
+                Guess!
+            </button>
+            <button 
+                type="reset" 
+                id="reset"
+                class="border-2 rounded bg-orange-300 border-orange-300 px-2 hover:border-orange-500"
+            >
+                Reset
+            </button>
+        </div>
+        <div id="guess"></div>
+    </div>
+</form>
+{% endblock content %}

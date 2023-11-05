@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "app-for-nico"
+version = "0.1.0"
+description = ""
+authors = ["Quentin Agobert <quentin.agobert@gmail.com>"]
+readme = "README.md"
+packages = [{include = "app"}]
+
+[tool.poetry.dependencies]
+python = ">=3.11, <3.13"
+django = "^4.2.5"
+numpy = "^1.26.0"
+pandas = "^2.1.1"
+scikit-learn = "^1.3.2"
+pillow = "^10.1.0"
+scikit-image = "^0.22.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

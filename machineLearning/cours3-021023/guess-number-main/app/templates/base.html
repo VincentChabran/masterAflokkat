@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>App</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+   </head>
+   <body>
+      {% block content %}{% endblock content %}
+      <script type="text/javascript">
+         const canvasWidth = 420;
+         const canvasHeight = 420;
+
+         window.addEventListener("load", () => {
+            resize();
+            document.addEventListener("mousedown", startPainting);
+            document.addEventListener("mouseup", stopPainting);
+            document.addEventListener("mousemove", sketch);
+            window.addEventListener("resize", resize);
+         });
+
+         const canvas = document.querySelector("#canvas");
+         const ctx = canvas.getContext("2d");
+         const form = document.querySelector("#form");
+         const button = document.querySelector("#button");
+         const reset = document.querySelector("#reset");
+
+         button.addEventListener("click", () => {
+            var newField = document.createElement("input");
+            newField.setAttribute("type", "hidden");
+            newField.setAttribute("name", "canvas");
+            // newField.setAttribute("value", `${ctx.getImageData(0, 0, canvasWidth, canvasHeight).data}`);
+
+            var dataURL = canvas.toDataURL("image/png"); // Capture le contenu du canvas en Base64
+            newField.setAttribute("value", dataURL);
+
+            form.appendChild(newField);
+         });
+
+         reset.addEventListener("click", () => {
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+         });
+
+         function resize() {
+            ctx.canvas.width = canvasWidth;
+            ctx.canvas.height = canvasHeight;
+         }
+
+         let coord = { x: 0, y: 0 };
+         let paint = false;
+
+         function getPosition(event) {
+            coord.x = event.clientX - canvas.offsetLeft;
+            coord.y = event.clientY - canvas.offsetTop;
+         }
+
+         function startPainting(event) {
+            paint = true;
+            getPosition(event);
+         }
+
+         function stopPainting() {
+            paint = false;
+         }
+
+         function sketch(event) {
+            if (!paint) return;
+            ctx.beginPath();
+            ctx.lineWidth = 5;
+            ctx.lineCap = "round";
+            ctx.strokeStyle = "red";
+            ctx.moveTo(coord.x, coord.y);
+
+            getPosition(event);
+
+            ctx.lineTo(coord.x, coord.y);
+            ctx.stroke();
+         }
+      </script>
+   </body>
+</html>

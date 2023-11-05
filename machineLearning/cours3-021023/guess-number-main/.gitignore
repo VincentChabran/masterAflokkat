@@ -1,0 +1,3 @@
+.git
+poetry.lock
+**/__pycache__
