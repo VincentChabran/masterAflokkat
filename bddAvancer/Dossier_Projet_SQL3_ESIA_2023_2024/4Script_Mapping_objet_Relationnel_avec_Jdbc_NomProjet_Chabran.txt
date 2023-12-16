@@ -1,0 +1,156 @@
+Vous devez décrire dans ce fichiers :
+- La structure du package java
+- Les différentes classes
+- Le résultat des tests des différentes fonctions
+- Attention : vous devez être à même d'invoquer depuis java les méthodes de vos type sql3
+
+
+
+
+La structure du package java
+Main.java
+DatabaseConnection.java
+Ville.java
+Bibliotheque.java
+Livre.java
+Adherent.java
+Emprunt.java
+
+
+Les différentes classes
+
+
+GestionBibliotheque
+DatabaseConnection
+Ville
+Bibliotheque
+Livre
+Adherent
+Emprunt
+
+
+
+
+Le résultat des tests des différentes fonctions
+
+
+GestionBibliotheque : 
+Point d'entrée contenant la fonction main.
+
+
+Ville :
+Les fonctions create update et delete font respectivement la création, la mise à jour et la suppression d’une ville avec succès.
+
+
+Pour tester ces fonctions j’ai préparé dans le main la fonction testCUDVilles qu’il faut décommenter. 
+
+
+
+
+count bibliothèque : compte le nombre de bibliothèque possédant l’id de la villes
+listBibliothéque : fait la liste des bibliothèques appartenant à la ville
+listVillesOrdered : liste les villes dans l'ordre alphabétique selon leur nom
+
+
+Pour tester ces fonctions j’ai préparé dans le main la fonction testVilleFunctions qu’il faut décommenter. 
+Elle permet de print le résultat de chaque fonction décrite précédemment .
+
+
+Bibliotheque : 
+Les fonctions create update et delete font respectivement la création, la mise à jour et la suppression d’une bibliothèque avec succès.
+
+
+Pour tester ces fonctions j’ai préparé dans le main la fonction testCreateUpdateDeleteBibliotheque qu’il faut décommenter. 
+
+
+
+
+countLivres: compte le nombre de livre possédant l’id de la villes
+listLivres : fait la liste des livres appartenant à la ville
+listBibliothequeOrdered : liste les bibliothéque dans l'ordre alphabétique selon leur nom
+
+
+Pour tester ces fonctions j’ai préparé dans le main la fonction testListerEtCompterBibliotheque qu’il faut décommenter. 
+Elle permet de print le résultat de chaque fonction décrite précédemment .
+
+
+
+
+La fonction getBibliothequeById récupère une bibliothéque grace a son id et retourne une instance de la classe Bibliothèque avec les informations ramène.
+
+
+Livre : 
+Les fonctions create update et delete font respectivement la création, la mise à jour et la suppression d’un livre avec succès.
+
+
+Pour tester ces fonctions j’ai préparé dans le main la fonction testCreateUpdateDeleteLivre qu’il faut décommenter. 
+
+
+
+
+countEmpruns: compte le nombre d’emprunt possédant l’id du livre
+listAdherentsEmprunteurs : fait la liste des Emprunt ayant été fait pour ce livre, en affichant le nom prenon de chaque personnes.
+listLivreOrdered : liste les livres dans l'ordre alphabétique selon leur nom
+
+
+Pour tester ces fonctions j’ai préparé dans le main la fonction testListerEtCompterEmpruntsLivre qu’il faut décommenter. 
+Elle permet de print le résultat de chaque fonction décrite précédemment .
+
+
+La fonction getLivreById récupère un livre grace a son id et retourne une instance de la classe Livre avec les informations ramène.
+
+
+Adherent : 
+Les fonctions create update et delete font respectivement la création, la mise à jour et la suppression d’un Adhérent avec succès.
+
+
+Pour tester ces fonctions j’ai préparé dans le main la fonction testCreateUpdateDeleteAdherent qu’il faut décommenter. 
+
+
+
+
+countEmpruns: compte le nombre d’emprunt possédant l’id de l’adhérent
+listAdherentsEmprunteurs : fait la liste des Emprunt ayant été fait par cette adhérent, en affichant le titre des livre emprunté.
+listAdhérentsOrdered : liste les adhérents dans l'ordre alphabétique selon leur nom
+
+
+Pour tester ces fonctions j’ai préparé dans le main la fonction testListerEtCompterEmpruntsAdherent qu’il faut décommenter. 
+Elle permet de print le résultat de chaque fonction décrite précédemment .
+
+
+La fonction getAdherentById récupère un livre grace a son id et retourne une instance de la classe Livre avec les informations ramène.
+
+
+Emprunt : 
+Les fonctions create update et delete font respectivement la création, la mise à jour et la suppression d’un Emprunt avec succès.
+
+
+Pour tester ces fonctions j’ai préparé dans le main la fonction testCreateUpdateDeleteEmprunt qu’il faut décommenter. 
+
+
+
+
+isOverdue:Elle renvoie un bolean qui est true si la date actuelle est postérieure à la date de retour de l'emprunt.
+durationDays : Cette fonction membre calcule la durée de l'emprunt en jours
+listEpruntsOrdered : liste les emprunt en fonction de la date dans l’ordre croissant.
+
+
+Pour tester ces fonctions j’ai préparé dans le main la fonction testEmpruntFunctions qu’il faut décommenter. 
+Elle permet de print le résultat de chaque fonction décrite précédemment .
+
+
+La fonction getEmpruntById récupère un livre grace a son id et retourne une instance de la classe Livre avec les informations ramène.
+
+
+
+
+DatabaseConnection :
+getConnection : permet de se connecter a la base de donnée.
+
+
+
+
+Vous devez être à même d'invoquer depuis java les méthodes de vos type sql3
+
+
+Toutes les fonctions précédentes utilisent les méthodes définies dans les types sql 3.
