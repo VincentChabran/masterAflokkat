@@ -1,0 +1,6 @@
+matplotlib
+seaborn
+pandas
+pyensae
+chardet
+folium
