@@ -1,0 +1,194 @@
+
+-----------------------------------------------------------
+I. INSTALLATION DE SQLDEVELOPER
+-----------------------------------------------------------
+
+1) Télécharger sql developer depuis le site d'Oracle
+et deziper dans un répertoire 
+par exemple OracleSqlDeveloper
+mkdir c:\logiciels\OracleSqlDeveloper
+(pour télécharger taper sur google :
+télécharger sqldeveloper Oracle (prendre la version avec le jdbk
+Vous devez avoir un compte Oracle ou le créer)
+
+https://www.oracle.com/tools/downloads/sqldev-downloads.html
+
+Si vous avez déjà le ZIP dezipé puis continuer en 3
+
+Si le sqldeveloper est déjà dezipé, aller directement en 3 en sautant 1 et 2
+
+3) Lancez le programme "sqldeveloper" en utilisant la commande ci-dessous :
+
+sqldeveloper 
+
+4) Le programme vous demande si vous voulez faire une migration. Refusez. 
+(La prochaine fois, il ne vous posera plus la question.)
+
+5) La fenêtre principale du programme "sqldeveloper" s'ouvre.
+
+
+-------------------------------------------------------------------
+II. CONNEXION AUX BASES DE DONNEES DEPUIS SQLDEVELOPER
+-------------------------------------------------------------------
+ETUDIANT ESIA SUIVRE CAS 3 UNIQUEMENT POUR L'iNSTANT.
+
+-----------------------------------------------------------------------------------------------------------------
+-- Cas 1 : Vous avez une base de données Oracle installée localement sur votre machine
+-----------------------------------------------------------------------------------------------------------------
+
+1.1) Dans le panneau de gauche, créez une nouvelle connexion 
+(en cliquant avec le bouton droit sur "Connexions").
+
+1.2) Un formulaire s'ouvre. Complétez les champs suivants, 
+et ne touchez pas aux autres :
+
+- Nom de connexion : NomUser_On_nomDeVotreBase (exemple : MOPOLO_on_ORCLPDB)
+
+- Nom utilisateur : votre-identifiant-oracle (exemple MOPOLO)
+
+
+- Mot de passe : votre-mot-de-passe-oracle
+
+(Vous pouvez enregistrer le mot de passe si vous le souhaitez en cochant la case)
+
+- Nom d’hôte : localhost -- ou l'IP de la machine ou le nom de la machine
+- Port : 1521 -- ou un autre port sur lequel écoute votre listener.
+
+- Nom Service : nomBase.nomDomaine (exemple : ORCLPDB.UNICE.FR, c'est le nom 
+complet que vous avez donné à votre base pluggable lors de la création de la base)
+
+1.3) Cliquez sur le bouton "test" en bas de la fenêtre. 
+(Vous devez voir en bas à gauche le message : SUCCES, dans le cas contraire,
+vérifier vos paramètres précédents ou contactez l'administrateur)
+
+1.4) Si 1.3 se fait avec succès, Cliquez sur le bouton "Connexion" en bas de 
+la fenêtre. (Cette connexion restera enregistrée pour la prochaine fois, 
+il suffira de la lancer dans le panneau de gauche.)
+
+1.5) Voilà ! Une fois connecté, vous pouvez taper vos requêtes dans le 
+panneau de droite et utiliser les flèches vertes pour les exécuter (voir la section III).
+
+
+-----------------------------------------------------------------------------------------------------------------
+-- Cas 2 : Vous n'avez pas une base de données Oracle locale à votre machine
+-- et votre université à une base de données Oracle dans son cloud
+-- L'administrateur de cette base de données doit vous donner : votre login Oracle et votre Password Oracle.
+-----------------------------------------------------------------------------------------------------------------
+
+2.1) Dans le panneau de gauche, créez une nouvelle connexion 
+(en cliquant avec le bouton droit sur "Connexions").
+
+2.2) Un formulaire s'ouvre. Complétez les champs suivants, 
+et ne touchez pas aux autres :
+
+- Nom de connexion : NomUserOracle_on_NomBase 
+(exemple : GBAGBOES2324_ON_nomVotrePDB)
+
+- Nom utilisateur : NomUserOracle (exemple GBAGBOES2324 )
+
+
+- Mot de passe : votre-mot-de-passe-oracle (GBAGBOES232401) il faut 
+respecter la casse
+
+(Cochez enregistrer le mot de passe pour ne pas le rentrer à chaque 
+connexion)
+
+- Nom d’hôte : l'IP de la machine ou le nom de la machine dans le cloud de votre école
+- Port : 1521 -- ou un autre port sur lequel écoute votre listener.
+- Nom Service : nomVotrePDB.votreEcole.fr
+
+2.3) Cliquez sur le bouton "test" en bas de la fenêtre. 
+(Vous devez voir en bas à gauche le message : SUCCES, dans le cas contraire,
+vérifier vos paramètres précédent ou envoyé moi un mail ou appelez moi 
+0673232484)
+
+2.4) Si 2.3 fait avec succès, Cliquez sur le bouton "Connexion" en bas de 
+la fenêtre. (Cette connexion restera enregistrée pour la prochaine fois, 
+il suffira de la lancer dans le panneau de gauche.)
+
+2.5) Voilà ! Une fois connecté, vous pouvez taper vos requêtes dans le 
+panneau de droite et utiliser les flèches vertes pour les exécuter.
+
+
+-----------------------------------------------------------------------------------------------------------------
+-- Cas 3 : Vous n'avez pas une base de données Oracle locale à votre machine.
+-- Vous ne pouvez pas utiliser la base de données Oracle disponible dans le cloud  
+-- de votre université. Utilisez la base disponible dans le cloud Oracle.
+-- L'administrateur de cette base de données doit vous donner : votre login Oracle et votre Password Oracle.
+-----------------------------------------------------------------------------------------------------------------
+
+3.1) Dans le panneau de gauche, créez une nouvelle connexion 
+(en cliquant avec le bouton droit sur "Connexions").
+
+3.2) Un formulaire s'ouvre. Complétez les champs suivants, 
+et ne touchez pas aux autres :
+
+- Nom de connexion : NomUserOracle_on_NomBase (exemple : GBAGBOES2324_ON_PDBBIHAR_ON_ORACLE_CLOUD)
+
+- Nom utilisateur : votre-identifiant-oracle (exemple : GBAGBOES2324)
+
+
+- Mot de passe : votre-mot-de-passe-oracle : NomUserOracle+01 (exemple : GBAGBOES232401) il 
+faut respecter la casse
+
+(Vous pouvez enregistrer le mot de passe si vous le souhaitez.)
+
+- Nom d’hôte : 129.151.234.184
+- Port : 1521
+- Service :PDBBIHAR.sub12051533510.vcnmiageuca.oraclevcn.com
+
+3.3) Cliquez sur le bouton "test" en bas de la fenêtre. 
+(Vous devez voir en bas à gauche le message : SUCCES, dans le cas contraire,
+vérifier vos paramètres ou contactez l'administrateur)
+
+3.4) Si 1.3 fait avec succès, Cliquez sur le bouton "Connexion" en bas de 
+la fenêtre. (Cette connexion restera enregistrée pour la prochaine fois, 
+il suffira de la lancer dans le panneau de gauche.)
+
+3.5) Voilà ! Une fois connecté, vous pouvez taper vos requêtes dans le 
+panneau de droite et utiliser les flèches vertes pour les exécuter.
+
+
+
+-------------------------------------------------------------------
+III. PRISE EN MAIN DE L'ENVIRONNEMENT UNE FOIS CONNECTE
+QUELQUE SOIT LE CAS 1, 2 ou 3.
+-------------------------------------------------------------------
+
+
+1) une fois connecté
+vous avez à gauche la base de navigation des objets, organisé par connexion
+à droite en haut, vous avez la zone d'exécution des commandes
+En bas la zone des résultats et des erreurs.
+
+2) Exécuter le script airbase pour obtenir vos tables
+@..\..\Scripts\airbase.sql
+
+3) Vérifier l'existance des tables :
+
+-- liste de vos tables
+select * from tab;
+
+-- s'il y a des noms de tables incompréhensible, videz la corbeille comme suit :
+purge recyclebin;
+
+-- vérifier la structure de chaque table
+describe pilote;
+
+describe avion;
+
+describe vol;
+
+-- consulter les lignes
+
+select * from pilote;
+select * from avion;
+select * from vol;
+
+
+3) Vous êtes prêts pour travailler
+
+
+
+
+

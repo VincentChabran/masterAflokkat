@@ -1,0 +1,41 @@
+Installer MongoDB Community Edition sur MacOs
+
+
+--Prise en charge par les plates-formes
+MongoDB ne supporte que les versions MacOS 10.11 et ultérieures sur Intel x86-64.
+
+Prérequis
+Si vous n'avez pas encore ajouté la source référentiel du depot de formules officiel
+de mongoDB, l'ajouter la liste des formules à partir d'un terminal, en tappant ce qui suit :
+
+brew tap mongodb/brew
+
+Installer MongoDB:
+
+brew install mongodb-community@4.0
+
+---Démarrer MongoDB 
+----------------------------
+
+1) Démarrer MongoDB en mode normal
+
+mongod --config /usr/local/etc/mongod.conf
+
+Alternativement, pour exécuter MongoDB en tant que service macOS,
+ lancez ce qui suit (le processus utilise le fichier 
+ /usr/local/etc/mongod.conf, créé pendant l'installation) :
+ 
+ brew services start mongodb-community@4.0
+ 
+ 
+ --Commencez à utiliser MongoDB.
+---------------------------------
+
+Démarrez un shell mongo sur la même machine hôte que le mongod. 
+Vous pouvez exécuter le shell mongo sans aucune option de ligne de commande
+ pour vous connecter à un mongod qui s'exécute sur votre serveur local avec 
+ le port par défaut 27017 :
+ 
+ Connecter et utiliser MongoDB : 
+ 
+ mongo

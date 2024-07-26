@@ -1,0 +1,242 @@
+--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+--++ Exercice MOOCEBFR4 : Ingénierie des Données du Big Data : SGBD NoSql et Lacs de Données avec Big Data SQL
+--++ par la pratique
+--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+--------------------------------------------------------------------------------------------------------
+-- Section 1 : S'assurer que MongoDB a été installé en local sur votre poste
+-- Cet envirionnement servira pour les exercices des modules :
+
+--  . Exercices Module M4.4 : INTRODUCTION A MONGODB ET LE MONGO SHELL
+--  . Exercices Module M4.5 : INTRODUCTION A MONGODB ET SON API JAVA
+
+--------------------------------------------------------------------------------------------------------
+
+
+
+
+----------------------------------------------------------------------------------------------------------------
+-- M4.5.1: Programmation des classes Employe.java et Dept.java 
+----------------------------------------------------------------------------------------------------------------
+*************************************************************************************************
+*************************************Exercices Java mongoDB *************************************
+****************************** Classes Dept.java et Employe.java **********************************
+*************************************************************************************************
+
+
+*************************************************************************************************
+M4.5.1.1. Avant de commencer si ce n'est déjà fait , sur votre poste de travail:
+	- Directement sur votre disque C:, D:, E: etc.(pas le bureau, etc.), créer un dossier TPMONGO
+	- Y Déposer le dossier : 8Cours_MongoDB_DossierEtudiant  récupéré depuis le DRIVE 
+	- ou à minima le sous-dossier : 2Exercices
+	- Ce dossier servira pour tous vos TP : MONGOSHELL et JAVA
+*************************************************************************************************
+
+*************************************************************************************************
+******EXERCICES API JAVA : classes Dept.java et Employe.java SEANCE 8/10 : 2h**********************
+*************************************************************************************************
+M4.5.1.2. Objectif du TP Java 
+
+Vous avez dans ce TP à implémenter ou tester deux classes java :
+- La classe Employe.java
+- La classe Dept.java
+Ces classes doivent être définies dans un package appelé tpjava.
+
+
+-------------------------------------------------------------------------------------------------
+M4.5.1.2.1 Préparation de l'environnement
+-------------------------------------------------------------------------------------------------
+
+Vous devez avoir dans le dossier /vagrant/TpBigData/tpmongo/M45TpMongoJava 
+
+les sous-dossiers suiivants :
+mongojar
+tpjava
+
+Le dossier mongojar contiendra ou contient le jar mongo-java-driver-3.12.10.jar
+Le dossier tpjava contiendra ou contient les classes Employe.java et Dept.java
+
+
+
+
+-------------------------------------------------------------------------------------------------
+-- M4.5.1.2.2 Installation du driver MongoDB JDBC
+-------------------------------------------------------------------------------------------------
+
+Nous supposons que vous avez déjà installé java sur votre machine (JDK17 au plus)
+
+Télécharger mongo-java-driver-3.12.10.jar depuis ici si ce n'est déjà :
+http://central.maven.org/maven2/org/mongodb/mongo-java-driver/3.12.10/. 
+Placez ce jar dans le dossier 
+/vagrant/TpBigData/tpmongo/M45TpMongoJava/mongojar
+
+-------------------------------------------------------------------------------------------------
+-- M4.5.1.2.3 Définition des variables d'environnement
+-------------------------------------------------------------------------------------------------
+
+Assurez que la variable d’environnement PATH contient le path java : ..\java\jdk-x.x.x\bin
+
+Définir une variable d’environnement MYPATH comme suit :
+
+-- Sous Windows
+Set MYPATH=?
+
+-- sous Mac OS
+export MYPATH=?
+
+-- Dans VM Big Data
+export MYPATH=/vagrant/TpBigData/tpmongo/M45TpMongoJava
+
+-------------------------------------------------------------------------------------------------
+-- M4.5.1.2.4 Lignes de compilation
+-------------------------------------------------------------------------------------------------
+
+-- Ligne de compilation et d'exécution de la classe Dept.java sous Windows
+javac -g -cp %MYPATH%\mongojar\mongo-java-driver-3.12.10.jar;%MYPATH% %MYPATH%\tpjava\Dept.java
+java -Xmx256m -Xms256m -cp %MYPATH%\mongojar\mongo-java-driver-3.12.10.jar;%MYPATH% tpjava.Dept
+
+-- Ligne de compilation et d'exécution de la classe Dept.java sous MACOS
+javac -cp "$MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH" "$MYPATH/tpjava/Dept.java"
+java -Xmx256m -Xms256m -cp "$MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH" tpjava.Dept
+
+-- Ligne de compilation et d'exécution de la classe Dept.java sous LINUX dans la VM Big Data
+javac -cp "$MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH" "$MYPATH/tpjava/Dept.java"
+java -Xmx256m -Xms256m -cp "$MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH" tpjava.Dept
+
+
+-- Ligne de compilation et d'exécution de la classe Employe.java sous windows
+javac -g -cp %MYPATH%\mongojar\mongo-java-driver-3.12.10.jar;%MYPATH% %MYPATH%\tpjava\Employe.java
+java -Xmx256m -Xms256m -cp %MYPATH%\mongojar\mongo-java-driver-3.12.10.jar;%MYPATH% tpjava.Employe
+
+-- Ligne de compilation et d'exécution de la classe Employe.java sous MACOS
+javac -g -cp $MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH $MYPATH/tpjava/Employe.java
+java -cp $MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH tpjava.Employe
+
+-- Ligne de compilation et d'exécution de la classe Employe.java sous LINUX dans la VM Big Data
+javac -g -cp $MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH $MYPATH/tpjava/Employe.java
+java -cp $MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH tpjava.Employe
+
+-------------------------------------------------------------------------------------------------
+-- M4.5.1.3. La classe Dept.java
+-------------------------------------------------------------------------------------------------
+
+Toutes les méthodes de cette classe sont déjà codées.
+
+Testez chacune des méthodes de cette classe en complétant les appels contenus dans le main du
+fichier Dept.java
+
+
+/**
+La classe Dept.java contient les méthodes suivantes :
+
+  public void createCollectionDept(String nomCollection);
+   
+  public void dropCollectionDept(String nomCollection);
+   
+  public void insertOneDept(String nomCollection, Document dept);
+
+  public void testInsertOneDept();
+  
+  public void insertManyDepts(String nomCollection, List<Document> depts);
+
+  public void testInsertManyDepts();
+  
+  public void getDeptById(String nomCollection, Integer deptId);
+  
+  public void getDepts(String nomCollection, 
+	Document whereQuery, 
+	Document projectionFields,
+	Document sortFields);
+	
+  public void updateDepts(String nomCollection, 
+  	Document whereQuery, 
+	Document updateExpressions,
+	UpdateOptions updateOptions
+	);
+	
+  public void deleteDepts(String nomCollection, Document filters);
+
+  public void displayIterator(Iterator it, String message);
+
+Chaque méthode est décrite lors succintement dans la classe.
+
+*/
+
+-------------------------------------------------------------------------------------------------
+-- M4.5.1.4. La classe Employe.java
+-------------------------------------------------------------------------------------------------
+
+
+Compléter l'Implémentation de chacune des méthodes de cette classe qui ne le sont pas.
+/**
+Le package TP contient deux classes. La classe Employe.java et la classe Dept.java
+Chacune de ces classes est dans son propre fichier.
+La classe Employe contient les methodes suivantes :
+
+	public void insertOneEmploye(String nomCollection, Document employe);
+	public void testInsertOneEmploye();
+	public void insertManyEmployes(String nomCollection, List<Document> employes);
+	public void testInsertManyEmployes();
+	public void getEmployeById(String nomCollection, Integer empId);
+	
+	public void getEmployes(String nomCollection, 
+		Document whereQuery, 
+		Document projectionFields,
+		Document sortFields);
+		
+	public void updateEmployes(String nomCollection, 
+		Document whereQuery, 
+		Document updateExpressions, UpdateOptions updateOptions);
+		
+	public void deleteEmployes(String nomCollection, Document filters);
+	public void displayIterator(Iterator it, String message);   
+	
+	public void joinLocalAndforeignCollections(
+				String localCollectionName, 
+				String foreignCollectionName, 
+				String localColJoinFieldName,
+				String foreigColJoinFieldName,
+				Document fielterFieldsOnLocalCollection,
+				String namedJoinedElements
+	);
+	
+	public void groupBy(
+            String collectionName,
+			String groupOperator,
+			Document groupFields) ;
+			
+	public void createEmployeIndexes(
+		String localCollectionName,
+		String indexName,
+		List<String> fieldNames,
+		boolean isAscendingIndex,
+		boolean indexUnique
+	);	
+	
+	public void getAllIndexesOfACollection(String localCollectionName);
+	
+	public void dropAIndexOfACollection(
+		String localCollectionName,
+		String indexName);
+
+Chaque methode est decrite lors de sa declaration dans la classe.
+
+*/
+
+
+----------------------------------------------------------------------------------------------------------------
+-- M4.5.2: Programmation des classes Client.java et Vol.java 
+----------------------------------------------------------------------------------------------------------------
+-- Voir le fichier 
+-- ..\3Mooc_BigData_BDNOSQL_DATA_LAKE\2Exercices_Mooc_BigData\Exercices_Module_4.5\M45TpMongoJava\1Sujets_exercices\
+2ExercicesJava\2Exercices_Java_Complementaire_CLIENT_VOL_cours_mongo.java
+
+
+
+--**************************************************************************************************************
+--* Exercices Module M4.6 : Architectures Big data et construction de lacs de Données avec Big Data SQL
+--  par la pratique
+--**************************************************************************************************************
+-- voir les Exercices du Module M4.6

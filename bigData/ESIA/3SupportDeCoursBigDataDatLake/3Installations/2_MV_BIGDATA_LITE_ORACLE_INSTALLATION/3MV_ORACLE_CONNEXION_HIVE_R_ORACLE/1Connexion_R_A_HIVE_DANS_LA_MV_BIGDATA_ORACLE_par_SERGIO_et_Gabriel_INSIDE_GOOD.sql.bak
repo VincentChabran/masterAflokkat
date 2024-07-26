@@ -1,0 +1,112 @@
+############################################################################################
+# Installation R et connexion à HIVE dans la VM de Sergio SIMONIAN actuellement
+# utilisée pour les projets Big Data
+# par Sergio Simonian <sergio.simonian@etu.univ-cotedazur.fr>
+# Me contacter par mail en de problèmes
+# Bonne installation
+############################################################################################
+
+
+
+
+
+
+############################################################################################
+# Etape 1. Etape connexion à HIVE dans la MV ORACLE, création d''une table et insertion de lignes
+############################################################################################
+
+# Example Query Hive table in R
+
+We first connect to Hive with beeline, create a table and insert some data.
+Then we install R and the RJDBC R package.
+Finally we run a query on the Hive table using RJDBC.
+
+## Connect to Hive with beeline
+
+beeline
+```bash
+0: jdbc:hive2://localhost:10000>!connect jdbc:hive2://localhost:10000 
+
+scan complete in 2ms
+Connecting to jdbc:hive2://localhost:10000
+Enter username for jdbc:hive2://localhost:10000: oracle
+Enter password for jdbc:hive2://localhost:10000: ********
+password : welcome1
+
+Connected to: Apache Hive (version 1.1.0-cdh5.13.1)
+Driver: Hive JDBC (version 1.1.0-cdh5.13.1)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
+0: jdbc:hive2://localhost:10000>
+```
+## Create a Hive table in Beeline and insert some data
+
+```SQL
+-- Create a database and a table
+CREATE DATABASE IF NOT EXISTS books;
+USE books;
+CREATE TABLE IF NOT EXISTS dictionary (word STRING, description STRING)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+
+-- Insert data into the table
+INSERT INTO dictionary VALUES ("a", "the letter a");
+INSERT INTO dictionary VALUES ("b", "the letter b");
+INSERT INTO dictionary VALUES ("c", "the letter c");
+
+-- Use Ctrl + C to exit
+```
+
+############################################################################################
+# Etape 2. Installation de R dans la MV ORACLE
+############################################################################################
+
+## PAS D''INSTALLATION CAR R EST DEJA INSTALLE DANS LA MV ORACLE
+
+
+############################################################################################
+# Etape 3. Installation du package RJDBC (DBI, Rjava seront aussi installés) dans la MV O
+############################################################################################
+
+## Install RJDBC RJDBC package
+
+Le package RJDBC est déjà installé.
+
+# Lancement de R
+
+```bash
+R
+```
+
+Run the following in the R terminal:
+# chargement des librairies
+```R
+library(RJDBC)
+hive_jdbc_jar <- "/usr/lib/hive/lib/hive-jdbc-1.1.0-cdh5.13.1-standalone.jar"
+hive_driver <- "org.apache.hive.jdbc.HiveDriver"
+hive_url <- "jdbc:hive2://localhost:10000"
+drv <- JDBC(hive_driver, hive_jdbc_jar)
+conn <- dbConnect(drv, hive_url, "oracle", "")
+show_databases <- dbGetQuery(conn, "show databases")
+print(show_databases);
+  database_name
+1         books
+2       default
+3     moviedemo
+4     moviework
+
+result <- dbGetQuery(conn, "select * from books.dictionary")
+print(result)
+```
+  dictionary.word dictionary.description
+1               a           the letter a
+2               b           the letter b
+3               c           the letter c
+ 
+
+
+--
+
+
+
+
+
+

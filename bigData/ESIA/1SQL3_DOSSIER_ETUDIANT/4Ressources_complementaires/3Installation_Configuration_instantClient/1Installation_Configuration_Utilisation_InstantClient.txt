@@ -1,0 +1,123 @@
+
+-----------------------------------------------------------
+I. INSTALLATION INSTANT CLIENT
+-----------------------------------------------------------
+
+1) Télécharger instant client depuis le site d'Oracle
+et deziper dans un répertoire 
+par exemple OracleSqlDeveloper
+mkdir c:\logiciels\instantClient
+(pour télécharger taper sur google : télécharger instant Oracle )
+ou utilser le lien ci-dessous:
+https://www.oracle.com/fr/database/technologies/instant-client/downloads.html
+
+Cliquer sur le lien:
+ 
+Instant Client for Microsoft Windows (x64)
+https://www.oracle.com/fr/database/technologies/instant-client/winx64-64-downloads.html
+
+Cliquer sur 
+Version 21.10.0.0.0
+
+
+a) Télécharger en cliquant sur le lien en face de : Basic Package
+Vous obtenez le zip suivant :
+instantclient-basic-windows.x64-21.10.0.0.0dbru.zip
+
+Placer le ZIP dans le dossier :
+mkdir c:\logiciels\instantClient
+
+
+b) Télécharger en cliquant sur le lien en face de : SQL*Plus Package
+Vous obtenez le zip suivant :
+instantclient-sqlplus-windows.x64-21.10.0.0.0dbru.zip
+
+Placer ce 2ème ZIP dans le dossier : 
+mkdir c:\logiciels\instantClient
+
+c) Dezippez les deux fichiers en faisant "Extraire ici"
+Le contenu des deux Zip sera mis dans le dossier:
+D:\2Logiciels\instantClient\instantclient_21_10
+
+D'autres Zip contenant d'autres clients peuvent être installés
+en suivant le même procédé.
+
+
+d) Le Fichier tnsnames.ora
+
+Créer un fichier tnsnames.ora dans le dossier :
+D:\2Logiciels\instantClient\instantclient_21_10
+
+Mettre dans ce fichier la chaine de connexion suivante pour configurer le nom réseau 
+de la base de données que vous voulez accéder via SQL :
+
+orclpdb =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = 129.151.234.184)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = orclpdb.sub12051533510.vcnmiageuca.oraclevcn.com)
+    )
+  )
+
+-------------------------------------------------------------------
+II. CONNEXION AUX BASES DE DONNEES AVEC AVEC INSTANT CLIENT
+-------------------------------------------------------------------
+Se déplacer dans le dossier :
+D:\2Logiciels\instantClient\instantclient_21_10
+
+lancer sqlplus comme suit :
+sqlplus mopolo@pdbcprof/password
+
+SQL*Plus: Release 21.0.0.0.0 - Production on Wed Aug 2 15:58:43 2023
+Version 21.10.0.0.0
+
+Copyright (c) 1982, 2022, Oracle.  All rights reserved.
+
+Last Successful login time: Wed Aug 02 2023 10:26:36 +02:00
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.17.0.0.0
+
+SQL>
+
+
+-------------------------------------------------------------------
+III. PRISE EN MAIN DE L'ENVIRONNEMENT UNE FOIS CONNECTE
+-------------------------------------------------------------------
+
+
+1) une fois connecté, exécuter le script airbase pour obtenir vos tables
+sqlplus>@..\..\Scripts\airbase.sql
+
+3) Vérifier l'existance des tables :
+
+-- liste de vos tables
+select * from tab;
+
+-- s'il y a des noms de tables incompréhensible, videz la corbeille comme suit :
+purge recyclebin;
+
+-- vérifier la structure de chaque table
+describe pilote;
+
+describe avion;
+
+describe vol;
+
+-- consulter les lignes
+
+select * from pilote;
+select * from avion;
+select * from vol;
+
+
+3) Vous êtes prêts pour travailler
+
+
+
+
+

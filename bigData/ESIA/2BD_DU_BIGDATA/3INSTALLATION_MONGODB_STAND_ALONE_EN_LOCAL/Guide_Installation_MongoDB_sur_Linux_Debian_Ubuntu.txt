@@ -1,0 +1,88 @@
+Installer MongoDB Community Edition sur Ubuntu / Debian
+
+Pour les deux distributions
+
+1) Importer la clé publique utilisée par le système de gestion des paquets. 
+$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+
+2) Créer un fichier " mongodb-org-4.0.list" pour MongoDB dans le dossier /etc/apt/sources.list.d/
+  $ cd /etc/apt/sources.list.d/
+  $ touch mongodb-org-4.0.list
+
+ajouter dans le ficher l'instruction selon la version:
+
+
+*** Pour UBUNTU ***
+Pour Ubuntu 18.04 (Bionique) exécuter ce qui suit :
+$ echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+
+ Pour Ubuntu 16.04 (Xenial) exécuter ce qui suit :
+$ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+
+Pour Ubuntu 14.04 (Trusty) exécuter ce qui suit :
+$ echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+  
+---DEBIAN ---
+Pour DEBIAN
+Pour Debian 8 (Jessie)  exécuter ce qui suit :
+$ echo "deb http://repo.mongodb.org/apt/debian jessie/mongodb-org/4.0 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+
+ Pour Debian 9 (Stretch) exécuter ce qui suit :
+$ echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/4.0 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+
+
+remarque: Actuellement, des paquets sont disponibles pour Debian 8 "Jessie" et Debian 9 "Stretch".
+ 
+*** Pour les deux distributions ***
+
+1) Recharger la base de données des paquets locaux
+$ sudo apt-get update 	 
+	
+2) Installer les paquets MongoDB. Pour installer la dernière version stable, exécutez ce qui suit:
+$ sudo apt-get install -y mongodb-org
+  
+  
+***** Répertoire mongoDB et localisation de certains fichiers ****
+Repertoire de mongoDb 
+
+Si vous l'avez installé via le gestionnaire de paquets, le répertoire de données /var/lib/mongodb et le répertoire log /var/log/mongodb sont créés pendant l'installation.
+
+Fichier de configuration
+
+Le package officiel de MongoDB comprend un fichier de configuration (/etc/mongod.conf)
+
+Ces paramètres (tels que les spécifications du répertoire de données et du répertoire de journaux) prennent effet au démarrage. 
+
+
+
+---Démarrage, Vérification, Arrêt de MongoDB 
+----------------------------
+
+1) Démarrer MongoDB
+
+sudo service mongod start
+
+2) Vérifier que MongoDB a bien démarré avec succès
+
+Vérifiez que le processus mongod a bien démarré en vérifiant le contenu du fichier
+ journal dans /var/log/mongodb/mongodod.log pour une lecture de ligne:
+ 
+ [initandlisten] waiting for connections on port 27017
+ 
+
+3) Arrêtez MongoDB
+sudo service mongod stop 
+
+1)Redémarrez MongoDB
+sudo service mongod restart
+
+--Commencez à utiliser MongoDB.
+---------------------------------
+
+Démarrez un shell mongo sur la même machine hôte que le mongod. 
+Vous pouvez exécuter le shell mongo sans aucune option de ligne de commande
+ pour vous connecter à un mongod qui s'exécute sur votre serveur local avec 
+ le port par défaut 27017 :
+ 
+ mongo
+ 

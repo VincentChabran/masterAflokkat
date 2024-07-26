@@ -1,0 +1,10 @@
+services:
+   proxy:
+      build: .
+      ports:
+         - "4443:4443"
+
+   api:
+      image: mon-application-go
+      deploy:
+         replicas: 2

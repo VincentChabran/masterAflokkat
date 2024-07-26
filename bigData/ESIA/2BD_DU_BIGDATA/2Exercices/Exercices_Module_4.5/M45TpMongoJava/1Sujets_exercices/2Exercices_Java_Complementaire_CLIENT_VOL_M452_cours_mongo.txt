@@ -1,0 +1,225 @@
+--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+--++ Exercice MOOCEBFR4 : Ingénierie des Données du Big Data : SGBD NoSql et Lacs de Données avec Big Data SQL
+--++ par la pratique
+--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+--------------------------------------------------------------------------------------------------------
+-- Section 1 : S'assurer que MongoDB a été installé en local sur votre poste
+-- Cet envirionnement servira pour les exercices des modules :
+
+--  . Exercices Module M4.4 : INTRODUCTION A MONGODB ET LE MONGO SHELL
+--  . Exercices Module M4.5 : INTRODUCTION A MONGODB ET SON API JAVA
+
+--------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------
+-- M4.5.2: Programmation des classes Client.java et Vol.java 
+----------------------------------------------------------------------------------------------------------------
+
+
+
+
+*************************************************************************************************
+*************************************Exercices Java mongoDB *************************************
+****************************** Classes Client.java et Vol.java **********************************
+*************************************************************************************************
+
+
+*************************************************************************************************
+M4.5.2.1. Avant de commencer si ce n'est déjà fait , sur votre poste de travail:
+	- Directement sur votre disque C:, D:, E: etc.(pas le bureau, etc.), créer un dossier TPMONGO
+	- Y Déposer le dossier : 8Cours_MongoDB_DossierEtudiant  récupéré depuis le DRIVE 
+	- ou à minima le sous-dossier : 2Exercices
+	- Ce dossier servira pour tous vos TP : MONGOSHELL et JAVA
+*************************************************************************************************
+
+*************************************************************************************************
+******EXERCICES API JAVA : classes Client.java et Vol.java SEANCE 8/10 : 2h**********************
+*************************************************************************************************
+
+-------------------------------------------------------------------------------------------------
+M4.5.2.2. Objectif du TP Java 
+-------------------------------------------------------------------------------------------------
+
+Vous avez dans ce TP à implémenter ou tester deux classes java :
+- La classe Vol.java
+- La classe Client.java
+Ces classes doivent être définies dans un package appelé tpjava.
+
+
+-------------------------------------------------------------------------------------------------
+M4.5.2.2.1 Préparation de l'environnement
+-------------------------------------------------------------------------------------------------
+
+Vous devez avoir dans le dossier /vagrant/TpBigData/tpmongo/M45TpMongoJava 
+les sous-dossiers suiivants :
+mongojar
+tpjava
+
+Le dossier mongojar contiendra ou contient le jar mongodb/mongo-java-driver-3.12.10.jar
+Le dossier tpjava contiendra ou contient les classes Vol.java et Client.java
+
+-------------------------------------------------------------------------------------------------
+M4.5.2.2.2 Installation du driver MongoDB JDBC
+-------------------------------------------------------------------------------------------------
+
+Nous supposons que vous avez déjà installé java sur votre machine (JDK17 au plus)
+
+Télécharger mongo-java-driver-3.12.10.jar depuis ici si ce n'est déjà :
+http://central.maven.org/maven2/org/mongodb/mongo-java-driver/3.12.10/. 
+Placez ce jar dans le dossier 
+/vagrant/TpBigData/tpmongo/M45TpMongoJava/mongojar
+
+-------------------------------------------------------------------------------------------------
+M4.5.2.2.3 Définition des variables d'environnement
+-------------------------------------------------------------------------------------------------
+
+Assurez que la variable d’environnement PATH contient le path java : ..\java\jdk-x.x.x\bin
+
+Définir une variable d’environnement MYPATH comme suit :
+
+-- Sous Windows
+Set MYPATH=?
+
+-- sous Mac OS
+export MYPATH=?
+
+-- Dans VM Big Data
+export MYPATH=/vagrant/TpBigData/tpmongo/M45TpMongoJava
+
+
+-------------------------------------------------------------------------------------------------
+M4.5.2.2.4 Lignes de compilation
+-------------------------------------------------------------------------------------------------
+
+-- Ligne de compilation et d'exécution de la classe Vol.java sous Windows
+javac -g -cp %MYPATH%\mongojar\mongo-java-driver-3.12.10.jar;%MYPATH% %MYPATH%\tpjava\Vol.java
+java -Xmx256m -Xms256m -cp %MYPATH%\mongojar\mongo-java-driver-3.12.10.jar;%MYPATH% tpjava.Vol
+
+-- Ligne de compilation et d'exécution de la classe Vol.java sous MACOS
+javac -cp "$MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH" "$MYPATH/tpjava/Vol.java"
+java -Xmx256m -Xms256m -cp "$MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH" tpjava.Vol
+
+
+-- Ligne de compilation et d'exécution de la classe Vol.java sous la VM LINUX BIG DATA
+javac -cp "$MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH" "$MYPATH/tpjava/Vol.java"
+java -Xmx256m -Xms256m -cp "$MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH" tpjava.Vol
+
+
+-- Ligne de compilation et d'exécution de la classe Client.java sous windows
+javac -g -cp %MYPATH%\mongojar\mongo-java-driver-3.12.10.jar;%MYPATH% %MYPATH%\tpjava\Client.java
+java -Xmx256m -Xms256m -cp %MYPATH%\mongojar\mongo-java-driver-3.12.10.jar;%MYPATH% tpjava.Client
+
+-- Ligne de compilation et d'exécution de la classe Client.java sous MACOS
+javac -g -cp $MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH $MYPATH/tpjava/Client.java
+java -cp $MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH tpjava.Client
+
+
+-- Ligne de compilation et d'exécution de la classe Client.java sous la VM LINUX BIG DATA
+javac -g -cp $MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH $MYPATH/tpjava/Client.java
+java -cp $MYPATH/mongojar/mongo-java-driver-3.12.10.jar:$MYPATH tpjava.Client
+-------------------------------------------------------------------------------------------------
+M4.5.2.3. La classe Vol.java
+-------------------------------------------------------------------------------------------------
+
+Toutes les méthodes de cette classe sont déjà codées.
+
+Testez chacune des méthodes de cette classe en complétant les appels contenus dans le main du
+fichier Dept.java
+
+
+/**
+Le package TP contient deux autres classes. La classe Vol et la classe Client
+Chacune de ces classes est dans son propre fichier.
+La classe Vol contient les méthodes suivantes :
+
+
+
+public void insertOneVol(String nomCollection, Document vol);
+public void testInsertOneVol();
+public void insertManyVols(String nomCollection, List<Document> vols);
+public void testInsertManyVols();
+public void getVolById(String nomCollection, Integer volId);
+
+
+Chaque méthode est décrite lors de sa déclaration dans la classe.
+
+*/
+
+
+*************************************************************************************************
+******EXERCICES API JAVA : classes DEPT.JAVA et EMPLOYE.JAVA SEANCE 9 et 10/10 : 2h chacune******
+*************************************************************************************************
+
+
+Les méthodes de cette classe sont partiellement codées.
+
+Compléter les méthodes non codées de cette classe contenues dans le fichier Employe.java.
+Les appels sont déjà en place pour les tester.
+
+-------------------------------------------------------------------------------------------------
+M4.5.2.4. La classe Client.java
+-------------------------------------------------------------------------------------------------
+
+/*
++++++++++++++++++++++++++++++++++++++++++ TRAVAIL A FAIRE : COMPLETER LES METHODES SUIVANTES ++++++++++++++++++++++++++++
+public void createCollectionClient(String nomCollection);
+public void dropCollectionClient(String nomCollection);
+public void insertOneClient(String nomCollection, Document client);
+public void testInsertOneClient();
+public void insertManyClients(String nomCollection, List<Document> clients);
+public void testInsertManyClients();
+public void getClientById(String nomCollection, Integer ClientId);
+public void getClients(String nomCollection, Document whereQuery, Document projectionFields, Document sortFields);
+public void updateClients(String nomCollection, Document whereQuery, Document updateExpressions, UpdateOptions updateOptions);
+public void deleteClients(String nomCollection, Document filters);
+public void displayIterator(Iterator it, String message);
+public void joinLocalAndforeignCollections(
+	String localCollectionName, 
+	String foreignCollectionName, 
+	String localColJoinFieldName,
+	String foreigColJoinFieldName,
+	Document whereQuery
+	);
+public void loadClientsFromJsonArrayFile (
+	String collectionName,
+	String filePath,
+	String fileName);
+	
+public void loadClientsFromCSVFile(
+	String collectionName,
+	String filePath,
+	String fileName	
+	);
+
+public void loadClientsFromJsonArrayFileWithMongoImport(
+	String dbName, 
+	boolean isJsonArray, 
+	String collectionName,
+	String filePath,
+	String fileName
+	);
+	
+public void loadClientsFromCSVFileWithMongoImport(
+	String dbName, 
+	boolean isCsvFile, 
+	String collectionName,
+	String filePath,
+	String fileName	
+	);
+	
+public void ajouterUneAppreciationAUnVol();
+
+*/
+
+
+--**************************************************************************************************************
+--* Exercices Module M4.6 : Architectures Big data et construction de lacs de Données avec Big Data SQL
+--  par la pratique
+--**************************************************************************************************************
+-- voir les Exercices du Module M4.6
+
